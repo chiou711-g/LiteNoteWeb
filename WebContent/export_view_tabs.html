@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<!-- <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script> -->
+<script	src="jquery-3.3.1.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("a").click(function(){
+		   $("a.activeSel").removeClass("activeSel");
+		   $(this).addClass("activeSel");
+		});
+	document.getElementById("begin1").click();
+});	
+</script>
+
+<style>
+a:link,a:visited {color:#EAFFEA; text-decoration:none; font-size:30px;}    /* unvisited link */
+a:hover,a:active {color:#cccccc;text-decoration:underline;}   /* mouse over link */
+body {background-color:#142b2b;}
+p.pos_fixed {position: fixed;	top: 1px;	right: 10px;}
+.activeSel {color:white;font-size:30px;font-weight:bolder;background-color:#142b2b;}
+</style>
+
+</head>
+<body>
+<p class="pos_fixed"><font style="font-weight:bold;font-size:38px; color:white;"><b>Select view</b></font></p>
+
+
+	<table border=0 width=72% align=left bgcolor=#697777>
+		<tr align=center>
+			<td><a id="begin1" class="activeSel" href="Export_tableView.html" target=body2>
+					Table view</a></td>
+			<td><a id="begin2" href="Export_listView.html" target=body2>
+					List view</a></td>
+		</tr>
+	</table>
+
+</body>
+</html>

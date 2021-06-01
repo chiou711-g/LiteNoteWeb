@@ -1,0 +1,29 @@
+@charset "UTF-8";
+
+a:link {color:#ffffff;text-decoration:none; font-size:30px;}    /* unvisited link */
+a:visited {color:#ffffff;text-decoration:none; font-size:30px;} /* visited link */
+a:hover {color:#ff5500;text-decoration:underline;}   /* mouse over link */
+a:active {color:#ff5500;text-decoration:underline;}  /* selected link */
+a.small {font-size:20px;}	
+body {color:#ffffff; background-color:#142b2b;}
+body {font-family: Arial, Helvetica, sans-serif;font-size: 100%;}
+input[type="submit"] { width: 10em;  height: 2.5em; font-size:20px;}
+input.small_button[type="submit"] { width: 10em;  height: 2.5em; font-size:15px;}
+input[type="text"] { height: 1em;font-size:1em;}
+input[type="button"] { width: 10em;  height: 2.5em;font-size:20px;}
+input.small_button[type="button"] { width: 10em;  height: 2.0em;font-size:15px;}
+input[type="radio"]{ font-size:1em;}
+input[type="reset"]{ width: 10em;  height: 2.5em; }
+ol li {margin-left: 1px; margin-bottom: 15px;}
+ul li {margin-left: 1px; margin-bottom: 15px;}
+ul {margin-left: -30px}
+ul li {margin-left: 0px; list-style: none}
+div {font-size:30px;}
+div.small {font-size:20px;}
+div.nav {font-size:30px;}
+legend {font-size:30px;}
+hr {border: 1px solid white; border-radius: 3px;}
+hr.blue {border: 1px solid blue; border-radius: 3px;}
+.highlight {background-color:blue;color:#fff;font-weight: bold}
+.big_btn {width:120px;height:40px;font-size:20px;}
+.big_checkbox {width:20px;height:20px;font-size:10px;}

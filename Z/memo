@@ -1,0 +1,23 @@
+MVC architecture:
+
+Model(MySQL table name):
+	1. stuRecordBean (student)
+	2. examRecordBean (examinee)
+	3. qBankBean (questionbank), qExamPaperBean (exampaper)
+
+View (HTML, JSP):
+	1. Student: stuApply,  stuRecord
+	2. Examination: examDo, examRecord
+	3. Question Bank: qBank, qExamPaper
+
+Control(Java):
+	1. student: stuApply,stuRecord
+	2. examDo, examRecord
+	3. qBank, qExamPaper
+
+=========================================
+IE中文字體不一的解法:
+1. 先用Windows XP的 Notepad,選用MS Gothic字型,檢視有無IE上所顯示的問題
+2. 有問題時,可啟用Notepad++,選擇其"編碼"標籤,先設"編譯成ANSI碼",然後貼上有問題的文字片段
+3. 按Ctrl+A選擇全文,再設"轉換成UTF-8碼格式"
+4. 復製此Notepad++中的文字片段,貼回到Notepad中,即可檢視問題是否已經修正	

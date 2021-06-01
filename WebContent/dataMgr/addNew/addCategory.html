@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Add Category</title>
+
+<script type="text/javascript" src="../../jquery-3.3.1.js"></script>	
+<link rel="stylesheet" type="text/css" href="../../myStyle.css">		
+	
+<style>
+.my_text {
+    font-family:    Arial, Helvetica, sans-serif;
+    font-size:      40px;
+    font-weight:    bold;
+}
+     
+#outer {
+	width: 100%;
+  	text-align: center;
+}
+ 
+#content {
+ 	display: inline-block;
+}	
+ 
+input.button_size {
+    width: 10em;  height: 3em;
+}	 
+</style>
+    
+</head>
+
+<body id="htmlbody">
+	<!-- Add Category start -->
+	<br>
+	&emsp;
+	<input type="button" name="back" value="返回" 
+		style="background-color:#49743D;font-weight:bold;color:#ffffff;" 
+		onclick="parent.postMessage('add new close', '*');history.back();">
+	<br><br>		
+	
+	<fieldset>
+	<legend>Add category</legend>
+	<form id="add_category_form" name="addCategoryForm">
+	<input type = "reset" value = "重新輸入" >
+	<script type="text/javascript" src="addCategory.js"></script>
+	<ol >
+		<li>
+			<ul>
+			<li>
+				<b>Category name:</b>
+				<input type = "text" id="add_category_name" name = "addCategoryName"  size = "30" value ="" style="background-color:Aquamarine;">
+			</li>
+			<li>	
+				<input type = "button" id="addCategoryBtn" value = "新增Category" class="button_size" 
+						style="background-color:#497440;font-weight:bold;color:#ffffff;">
+			</li>			
+			</ul>
+		</li>
+	</ol>
+	</form>
+	</fieldset>
+	
+	<div id="outer">  
+    <div class="my_text" id="content"></div>
+	</div>
+	
+    <div id="addCategoryInfo">
+		<fieldset>
+			<legend >新加入的Category</legend>
+			<div id="ajaxAddCategoryInfo"></div>
+		</fieldset>
+	</div>
+			
+	<!-- Add category end -->
+
+</body>
+</html>
