@@ -52,7 +52,12 @@ public class ImportJson extends HttpServlet {
 		if(jsonObj != null)
 		{
 			JSONArray categories = new JSONArray();
-			categories = jsonObj.getJSONArray("content");
+			try {
+				categories = jsonObj.getJSONArray("content");
+			} catch (JSONException e3) {
+				// TODO Auto-generated catch block
+				e3.printStackTrace();
+			}
 			
 			int cate_last_id = 0;
 			try {
@@ -64,14 +69,25 @@ public class ImportJson extends HttpServlet {
 			for(int i=0; i<categories.length(); i++)
 			{
 				JSONObject cateObj = new JSONObject();
-				cateObj = categories.getJSONObject(i);
+				try {
+					cateObj = categories.getJSONObject(i);
+				} catch (JSONException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
 	
 				//category id
 				int addCategoryId = cate_last_id+i+1;
 				System.out.println("ImportJson / _doPost / addCategoryId = "+ addCategoryId);
 				
 				//category name
-				String addCategoryName =  cateObj.getString("category");
+				String addCategoryName = null;
+				try {
+					addCategoryName = cateObj.getString("category");
+				} catch (JSONException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
 				System.out.println("ImportJson / _doPost / addCategoryName = "+ addCategoryName);
 				
 				// insert new category row
@@ -85,7 +101,13 @@ public class ImportJson extends HttpServlet {
 					e.printStackTrace();
 				}
 				
-				JSONArray pages = cateObj.getJSONArray("link_page");
+				JSONArray pages = null;
+				try {
+					pages = cateObj.getJSONArray("link_page");
+				} catch (JSONException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
 				int pagesCnt = pages.length();
 				System.out.println("ImportJson / _doPost / pagesCnt = "+ pagesCnt);
 				
@@ -100,8 +122,20 @@ public class ImportJson extends HttpServlet {
 					System.out.println("ImportJson / _doPost / page_tableId = "+ page_tableId);
 					
 					// page title
-					JSONObject pageObj =  pages.getJSONObject(j);
-					String page_title = pageObj.getString("title");
+					JSONObject pageObj = null;
+					try {
+						pageObj = pages.getJSONObject(j);
+					} catch (JSONException e2) {
+						// TODO Auto-generated catch block
+						e2.printStackTrace();
+					}
+					String page_title = null;
+					try {
+						page_title = pageObj.getString("title");
+					} catch (JSONException e2) {
+						// TODO Auto-generated catch block
+						e2.printStackTrace();
+					}
 					System.out.println("ImportJson / _doPost / page_title = "+ page_title);
 	
 					// category Id
@@ -120,16 +154,34 @@ public class ImportJson extends HttpServlet {
 					}
 					
 					// add new link
-					JSONArray links = pageObj.getJSONArray("links");
+					JSONArray links = null;
+					try {
+						links = pageObj.getJSONArray("links");
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					int linksCnt = links.length();
 					
 					for(int k=0;k<linksCnt;k++)
 					{
-						JSONObject linkObj = links.getJSONObject(k);
+						JSONObject linkObj = null;
+						try {
+							linkObj = links.getJSONObject(k);
+						} catch (JSONException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 						NoteService noteBeanService = new NoteService();
 	
 						// note link URI
-						String note_link_uri = linkObj.getString("note_link_uri");
+						String note_link_uri = null;
+						try {
+							note_link_uri = linkObj.getString("note_link_uri");
+						} catch (JSONException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 						
 						String note_image_uri = null;
 						
@@ -140,7 +192,13 @@ public class ImportJson extends HttpServlet {
 							e1.printStackTrace();
 						}
 						
-						String note_title = linkObj.getString("note_title");
+						String note_title = null;
+						try {
+							note_title = linkObj.getString("note_title");
+						} catch (JSONException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 						System.out.println("ImportJson / _doPost / note_title = "+ note_title);
 						try 
 						{

@@ -54,8 +54,13 @@ public class ExportTableView extends HttpServlet {
 			System.out.println("ExportTableView / category_selection = null");
 			JSONObject clientObj = new JSONObject();
 			PrintWriter out = response.getWriter();
-			clientObj.put("client","none");
-			clientObj.put("content","No selection yet, please go back and select again.");
+			try {
+				clientObj.put("client","none");
+				clientObj.put("content","No selection yet, please go back and select again.");
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			out.print(clientObj.toString());
 		    out.flush();
 			return;
@@ -199,8 +204,13 @@ public class ExportTableView extends HttpServlet {
 					System.out.println("ExportTableView / _doPost / page title = " + pageBean.getPage_title());
 
 					JSONObject page = new JSONObject();
-					page.put("links",links);
-					page.put("title",pageBean.getPage_title());
+					try {
+						page.put("links",links);
+						page.put("title",pageBean.getPage_title());
+					} catch (JSONException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					
 					category_id = pageBean.getPage_category_id();
 
@@ -224,7 +234,12 @@ public class ExportTableView extends HttpServlet {
 					
 				if(category != null)
 				{
-					category.put("pages",pages);
+					try {
+						category.put("pages",pages);
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					categories.put(category);
 				}					
 			}
@@ -233,7 +248,12 @@ public class ExportTableView extends HttpServlet {
 		
 		// output Json to Ajax
 		JSONObject clientObj = new JSONObject();
-		clientObj.put("categories",categories);
+		try {
+			clientObj.put("categories",categories);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		System.out.println("ExportTableView / clientObj = " + clientObj);
 		
 		PrintWriter out = response.getWriter();
@@ -244,12 +264,30 @@ public class ExportTableView extends HttpServlet {
 	    String listStr = "";
 	    for(int i=0;i<categories.length();i++  )
 	    {
-	    	JSONArray pages = ((JSONObject)categories.get(i)).getJSONArray("pages");
+	    	JSONArray pages = null;
+			try {
+				pages = ((JSONObject)categories.get(i)).getJSONArray("pages");
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	    	for(int j=0;j<pages.length();j++)
 	    	{
-	    		JSONArray links = ((JSONObject)pages.get(j)).getJSONArray("links");
+	    		JSONArray links = null;
+				try {
+					links = ((JSONObject)pages.get(j)).getJSONArray("links");
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 	    		
-	    		String title = ((JSONObject)pages.get(j)).getString("title");
+	    		String title = null;
+				try {
+					title = ((JSONObject)pages.get(j)).getString("title");
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				listStr = listStr.concat("<div style=\"width:100%;background-color:#D0FD82;text-align:center;font-style:italic; font-size:32px;\"><b>" + title + "</b></div>");
 	    		listStr = listStr.concat("<div class=\"container\">");
 
@@ -257,9 +295,21 @@ public class ExportTableView extends HttpServlet {
 	    		{
 					listStr = listStr.concat("<div class=\"item\">");
 
-	    			String linkUriStr = ((JSONObject)links.get(k)).getString("note_link_uri"); 
+	    			String linkUriStr = null;
+					try {
+						linkUriStr = ((JSONObject)links.get(k)).getString("note_link_uri");
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} 
 
-	    			String imageUriStr = ((JSONObject)links.get(k)).getString("note_image_uri"); 
+	    			String imageUriStr = null;
+					try {
+						imageUriStr = ((JSONObject)links.get(k)).getString("note_image_uri");
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} 
 	    			
 	    			if(linkUriStr.contains("youtu.be"))
 	    				linkUriStr = linkUriStr.replace("youtu.be","www.youtube.com");
@@ -279,7 +329,13 @@ public class ExportTableView extends HttpServlet {
 	    			listStr = listStr.concat("</a>");
 	    			
 					// note title
-					String noteTitle =  ((JSONObject)links.get(k)).getString("note_title"); 
+					String noteTitle = null;
+					try {
+						noteTitle = ((JSONObject)links.get(k)).getString("note_title");
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} 
 					String titleArea = "<textarea readonly disabled  wrap=\"hard\" style=\"width:200px;height:50px;font-size:10px; resize:none;color:#ffffff;background-color:#000000\">" + noteTitle + "</textarea>";
 					listStr = listStr.concat(titleArea);
 					
@@ -307,7 +363,7 @@ public class ExportTableView extends HttpServlet {
 	    // save local table view file
 		if(osName.contains("Windows"))
 		{
-			copyPath = "c:/eclipse-workspace/LiteNoteWeb/WebContent/EXPORT_TABLE_VIEW.html";
+			copyPath = "D:/Eclipse_ee_workspace/LiteNoteWeb/WebContent/EXPORT_TABLE_VIEW.html";
 			BufferedWriter writer1 = getWriter(copyPath);
 		    writer1.write(getHtmlString(listStr));
 		    writer1.close();		

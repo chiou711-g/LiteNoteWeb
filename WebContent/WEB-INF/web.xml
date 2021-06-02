@@ -1,301 +1,300 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-		 xmlns="https://java.sun.com/xml/ns/javaee" 
-		 xmlns:web="http://java.sun.com/xml/ns/javaee" 
-		 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" 
-		 id="WebApp_ID" 
-		 version="3.0">
-		 
-  <display-name>LiteNoteWeb</display-name>
-  
-  <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-  </welcome-file-list>
-  
-  <resource-ref>
-    <res-ref-name>jdbc/LiteNoteWeb</res-ref-name>
-    <res-type>javax.sql.DataSource</res-type>
-    <res-auth>Container</res-auth>
-    <res-sharing-scope>Shareable</res-sharing-scope>
-  </resource-ref>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="https://java.sun.com/xml/ns/javaee"
+	xmlns:web="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	id="WebApp_ID" version="3.0">
 
-<!-- For addNote.js -->  
-  <servlet>
-    <description>Get Information about Add Note</description>
-    <display-name>AddNote</display-name>
-    <servlet-name>AddNote</servlet-name>
-    <servlet-class>addNew.AddNote</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>AddNote</servlet-name>
-    <url-pattern>/dataMgr/addNew/AddNote</url-pattern>
-  </servlet-mapping>
+	<display-name>LiteNoteWeb</display-name>
 
-<!-- For addPlaylist.js -->  
-  <servlet>
-    <description>Get Information about Add Playlist</description>
-    <display-name>AddPlaylist</display-name>
-    <servlet-name>AddPlaylist</servlet-name>
-    <servlet-class>addNew.AddPlaylist</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>AddPlaylist</servlet-name>
-    <url-pattern>/dataMgr/addNew/AddPlaylist</url-pattern>
-  </servlet-mapping>
-  
-  
-<!-- For addNote.js -->  
-  <servlet>
-    <description>Get Information about List Pages</description>
-    <display-name>ListPages</display-name>
-    <servlet-name>ListPages</servlet-name>
-    <servlet-class>pageBean.ListPages</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ListPages</servlet-name>
-    <url-pattern>/dataMgr/addNew/ListPages</url-pattern>
-  </servlet-mapping>  
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
 
-<!-- For addPage.js -->  
-  <servlet>
-    <description>Get Information about Add Page</description>
-    <display-name>AddPage</display-name>
-    <servlet-name>AddPage</servlet-name>
-    <servlet-class>addNew.AddPage</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>AddPage</servlet-name>
-    <url-pattern>/dataMgr/addNew/AddPage</url-pattern>
-  </servlet-mapping>
-  
-<!-- For addPage.js and editPage.js-->   
-  <servlet>
-    <description>Get Information about List Categories</description>
-    <display-name>ListCategories</display-name>
-    <servlet-name>ListCategories</servlet-name>
-    <servlet-class>categoryBean.ListCategories</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ListCategories</servlet-name>
-    <url-pattern>/dataMgr/edit/ListCategories</url-pattern>
-    <url-pattern>/dataMgr/addNew/ListCategories</url-pattern>
-  </servlet-mapping>   
+	<resource-ref>
+		<res-ref-name>jdbc/LiteNoteWeb</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+		<res-auth>Container</res-auth>
+		<res-sharing-scope>Shareable</res-sharing-scope>
+	</resource-ref>
 
-<!-- For addCategory.js -->  
-  <servlet>
-    <description>Get Information about Add Category</description>
-    <display-name>AddCategory</display-name>
-    <servlet-name>AddCategory</servlet-name>
-    <servlet-class>addNew.AddCategory</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>AddCategory</servlet-name>
-    <url-pattern>/dataMgr/addNew/AddCategory</url-pattern>
-  </servlet-mapping>
+	<!-- For addNote.js -->
+	<servlet>
+		<description>Get Information about Add Note</description>
+		<display-name>AddNote</display-name>
+		<servlet-name>AddNote</servlet-name>
+		<servlet-class>addNew.AddNote</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddNote</servlet-name>
+		<url-pattern>/dataMgr/addNew/AddNote</url-pattern>
+	</servlet-mapping>
 
-<!-- For editNote.js -->   
-  <servlet>
-    <description>Get Information about Edit Note</description>
-    <display-name>EditNote</display-name>
-    <servlet-name>EditNote</servlet-name>
-    <servlet-class>edit.EditNote</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>EditNote</servlet-name>
-    <url-pattern>/dataMgr/edit/EditNote</url-pattern>
-  </servlet-mapping>  
+	<!-- For addPlaylist.js -->
+	<servlet>
+		<description>Get Information about Add Playlist</description>
+		<display-name>AddPlaylist</display-name>
+		<servlet-name>AddPlaylist</servlet-name>
+		<servlet-class>addNew.AddPlaylist</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddPlaylist</servlet-name>
+		<url-pattern>/dataMgr/addNew/AddPlaylist</url-pattern>
+	</servlet-mapping>
 
-<!-- For editPage.js -->   
-  <servlet>
-    <description>Get Information about Edit Page</description>
-    <display-name>EditPage</display-name>
-    <servlet-name>EditPage</servlet-name>
-    <servlet-class>edit.EditPage</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>EditPage</servlet-name>
-    <url-pattern>/dataMgr/edit/EditPage</url-pattern>
-  </servlet-mapping> 
-  
-<!-- For editCategory.js -->   
-  <servlet>
-    <description>Get Information about Category</description>
-    <display-name>EditCategory</display-name>
-    <servlet-name>EditCategory</servlet-name>
-    <servlet-class>edit.EditCategory</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>EditCategory</servlet-name>
-    <url-pattern>/dataMgr/edit/EditCategory</url-pattern>
-  </servlet-mapping>   
-  
-<!-- For swapCategory.js -->   
-  <servlet>
-    <description>Swap Category</description>
-    <display-name>SwapCategory</display-name>
-    <servlet-name>SwapCategory</servlet-name>
-    <servlet-class>operation.SwapCategory</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>SwapCategory</servlet-name>
-    <url-pattern>/dataMgr/operation/SwapCategory</url-pattern>
-  </servlet-mapping>    
-  
-<!-- For swapPage.js -->   
-  <servlet>
-    <description>Swap Page</description>
-    <display-name>SwapPage</display-name>
-    <servlet-name>SwapPage</servlet-name>
-    <servlet-class>operation.SwapPage</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>SwapPage</servlet-name>
-    <url-pattern>/dataMgr/operation/SwapPage</url-pattern>
-  </servlet-mapping>     
-  
-   <!-- For movePage.js -->   
-  <servlet>
-    <description>Move Page</description>
-    <display-name>MovePage</display-name>
-    <servlet-name>MovePage</servlet-name>
-    <servlet-class>operation.MovePage</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>MovePage</servlet-name>
-    <url-pattern>/dataMgr/operation/MovePage</url-pattern>
-  </servlet-mapping>     
-  
-  <!-- For moveCategory.js -->   
-  <servlet>
-    <description>Move Category</description>
-    <display-name>MoveCategory</display-name>
-    <servlet-name>MoveCategory</servlet-name>
-    <servlet-class>operation.MoveCategory</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>MoveCategory</servlet-name>
-    <url-pattern>/dataMgr/operation/MoveCategory</url-pattern>
-  </servlet-mapping>   
-  
-<!-- For swapNote.js -->   
-  <servlet>
-    <description>Swap Note</description>
-    <display-name>SwapNote</display-name>
-    <servlet-name>SwapNote</servlet-name>
-    <servlet-class>operation.SwapNote</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>SwapNote</servlet-name>
-    <url-pattern>/dataMgr/operation/SwapNote</url-pattern>
-  </servlet-mapping>    
-  
-  <!-- For moveNote.js -->   
-  <servlet>
-    <description>Move Note</description>
-    <display-name>MoveNote</display-name>
-    <servlet-name>MoveNote</servlet-name>
-    <servlet-class>operation.MoveNote</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>MoveNote</servlet-name>
-    <url-pattern>/dataMgr/operation/MoveNote</url-pattern>
-  </servlet-mapping>     
-    
-<!-- For viewCategory.js -->   
-  <servlet>
-    <description>Get Information about View Category</description>
-    <display-name>ViewCategory</display-name>
-    <servlet-name>ViewCategory</servlet-name>
-    <servlet-class>view.ViewCategory</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ViewCategory</servlet-name>
-    <url-pattern>/dataMgr/view/ViewCategory</url-pattern>
-  </servlet-mapping> 
-  
-       
-<!-- For viewPage.js -->   
-  <servlet>
-    <description>Get Information about View Page</description>
-    <display-name>ViewPage</display-name>
-    <servlet-name>ViewPage</servlet-name>
-    <servlet-class>view.ViewPage</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ViewPage</servlet-name>
-    <url-pattern>/dataMgr/view/ViewPage</url-pattern>
-  </servlet-mapping>   
-  
-<!-- For export.js / View Categories-->   
-  <servlet>
-    <description>Get Information about View Categories</description>
-    <display-name>ViewCategories</display-name>
-    <servlet-name>ViewCategories</servlet-name>
-    <servlet-class>export.ViewCategories</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ViewCategories</servlet-name>
-    <url-pattern>/export/ViewCategories</url-pattern>
-  </servlet-mapping>   
 
-<!-- For export.js / View Pages-->   
-  <servlet>
-    <description>Get Information about ExportJson View pages</description>
-    <display-name>ViewPages</display-name>
-    <servlet-name>ViewPages</servlet-name>
-    <servlet-class>export.ViewPages</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ViewPages</servlet-name>
-    <url-pattern>/export/ViewPages</url-pattern>
-  </servlet-mapping>    
-  
-<!-- For export.js -->   
-  <servlet>
-    <description>Get Information about ExportJson</description>
-    <display-name>ExportJson</display-name>
-    <servlet-name>ExportJson</servlet-name>
-    <servlet-class>export.ExportJson</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ExportJson</servlet-name>
-    <url-pattern>/export/ExportJson</url-pattern>
-  </servlet-mapping>    
-  
-<!-- For export.js -->   
-  <servlet>
-    <description>Export List View</description>
-    <display-name>ExportListView</display-name>
-    <servlet-name>ExportListView</servlet-name>
-    <servlet-class>export.ExportListView</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ExportListView</servlet-name>
-    <url-pattern>/export/ExportListView</url-pattern>
-  </servlet-mapping>     
-  
-<!-- For export.js -->   
-  <servlet>
-    <description>Export Table View</description>
-    <display-name>ExportTableView</display-name>
-    <servlet-name>ExportTableView</servlet-name>
-    <servlet-class>export.ExportTableView</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ExportTableView</servlet-name>
-    <url-pattern>/export/ExportTableView</url-pattern>
-  </servlet-mapping>      
-  
-<!-- For import Json in importJson.js-->   
-  <servlet>
-    <description>Get Information about ImportJson</description>
-    <display-name>ImportJson</display-name>
-    <servlet-name>ImportJson</servlet-name>
-    <servlet-class>importJson.ImportJson</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ImportJson</servlet-name>
-    <url-pattern>/importJson/ImportJson</url-pattern>
-  </servlet-mapping>   
-  
+	<!-- For addNote.js -->
+	<servlet>
+		<description>Get Information about List Pages</description>
+		<display-name>ListPages</display-name>
+		<servlet-name>ListPages</servlet-name>
+		<servlet-class>pageBean.ListPages</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ListPages</servlet-name>
+		<url-pattern>/dataMgr/addNew/ListPages</url-pattern>
+	</servlet-mapping>
+
+	<!-- For addPage.js -->
+	<servlet>
+		<description>Get Information about Add Page</description>
+		<display-name>AddPage</display-name>
+		<servlet-name>AddPage</servlet-name>
+		<servlet-class>addNew.AddPage</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddPage</servlet-name>
+		<url-pattern>/dataMgr/addNew/AddPage</url-pattern>
+	</servlet-mapping>
+
+	<!-- For addPage.js and editPage.js -->
+	<servlet>
+		<description>Get Information about List Categories</description>
+		<display-name>ListCategories</display-name>
+		<servlet-name>ListCategories</servlet-name>
+		<servlet-class>categoryBean.ListCategories</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ListCategories</servlet-name>
+		<url-pattern>/dataMgr/edit/ListCategories</url-pattern>
+		<url-pattern>/dataMgr/addNew/ListCategories</url-pattern>
+	</servlet-mapping>
+
+	<!-- For addCategory.js -->
+	<servlet>
+		<description>Get Information about Add Category</description>
+		<display-name>AddCategory</display-name>
+		<servlet-name>AddCategory</servlet-name>
+		<servlet-class>addNew.AddCategory</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddCategory</servlet-name>
+		<url-pattern>/dataMgr/addNew/AddCategory</url-pattern>
+	</servlet-mapping>
+
+	<!-- For editNote.js -->
+	<servlet>
+		<description>Get Information about Edit Note</description>
+		<display-name>EditNote</display-name>
+		<servlet-name>EditNote</servlet-name>
+		<servlet-class>edit.EditNote</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EditNote</servlet-name>
+		<url-pattern>/dataMgr/edit/EditNote</url-pattern>
+	</servlet-mapping>
+
+	<!-- For editPage.js -->
+	<servlet>
+		<description>Get Information about Edit Page</description>
+		<display-name>EditPage</display-name>
+		<servlet-name>EditPage</servlet-name>
+		<servlet-class>edit.EditPage</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EditPage</servlet-name>
+		<url-pattern>/dataMgr/edit/EditPage</url-pattern>
+	</servlet-mapping>
+
+	<!-- For editCategory.js -->
+	<servlet>
+		<description>Get Information about Category</description>
+		<display-name>EditCategory</display-name>
+		<servlet-name>EditCategory</servlet-name>
+		<servlet-class>edit.EditCategory</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EditCategory</servlet-name>
+		<url-pattern>/dataMgr/edit/EditCategory</url-pattern>
+	</servlet-mapping>
+
+	<!-- For swapCategory.js -->
+	<servlet>
+		<description>Swap Category</description>
+		<display-name>SwapCategory</display-name>
+		<servlet-name>SwapCategory</servlet-name>
+		<servlet-class>operation.SwapCategory</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SwapCategory</servlet-name>
+		<url-pattern>/dataMgr/operation/SwapCategory</url-pattern>
+	</servlet-mapping>
+
+	<!-- For swapPage.js -->
+	<servlet>
+		<description>Swap Page</description>
+		<display-name>SwapPage</display-name>
+		<servlet-name>SwapPage</servlet-name>
+		<servlet-class>operation.SwapPage</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SwapPage</servlet-name>
+		<url-pattern>/dataMgr/operation/SwapPage</url-pattern>
+	</servlet-mapping>
+
+	<!-- For movePage.js -->
+	<servlet>
+		<description>Move Page</description>
+		<display-name>MovePage</display-name>
+		<servlet-name>MovePage</servlet-name>
+		<servlet-class>operation.MovePage</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MovePage</servlet-name>
+		<url-pattern>/dataMgr/operation/MovePage</url-pattern>
+	</servlet-mapping>
+
+	<!-- For moveCategory.js -->
+	<servlet>
+		<description>Move Category</description>
+		<display-name>MoveCategory</display-name>
+		<servlet-name>MoveCategory</servlet-name>
+		<servlet-class>operation.MoveCategory</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MoveCategory</servlet-name>
+		<url-pattern>/dataMgr/operation/MoveCategory</url-pattern>
+	</servlet-mapping>
+
+	<!-- For swapNote.js -->
+	<servlet>
+		<description>Swap Note</description>
+		<display-name>SwapNote</display-name>
+		<servlet-name>SwapNote</servlet-name>
+		<servlet-class>operation.SwapNote</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SwapNote</servlet-name>
+		<url-pattern>/dataMgr/operation/SwapNote</url-pattern>
+	</servlet-mapping>
+
+	<!-- For moveNote.js -->
+	<servlet>
+		<description>Move Note</description>
+		<display-name>MoveNote</display-name>
+		<servlet-name>MoveNote</servlet-name>
+		<servlet-class>operation.MoveNote</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MoveNote</servlet-name>
+		<url-pattern>/dataMgr/operation/MoveNote</url-pattern>
+	</servlet-mapping>
+
+	<!-- For viewCategory.js -->
+	<servlet>
+		<description>Get Information about View Category</description>
+		<display-name>ViewCategory</display-name>
+		<servlet-name>ViewCategory</servlet-name>
+		<servlet-class>view.ViewCategory</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ViewCategory</servlet-name>
+		<url-pattern>/dataMgr/view/ViewCategory</url-pattern>
+	</servlet-mapping>
+
+
+	<!-- For viewPage.js -->
+	<servlet>
+		<description>Get Information about View Page</description>
+		<display-name>ViewPage</display-name>
+		<servlet-name>ViewPage</servlet-name>
+		<servlet-class>view.ViewPage</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ViewPage</servlet-name>
+		<url-pattern>/dataMgr/view/ViewPage</url-pattern>
+	</servlet-mapping>
+
+	<!-- For export.js / View Categories -->
+	<servlet>
+		<description>Get Information about View Categories</description>
+		<display-name>ViewCategories</display-name>
+		<servlet-name>ViewCategories</servlet-name>
+		<servlet-class>export.ViewCategories</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ViewCategories</servlet-name>
+		<url-pattern>/export/ViewCategories</url-pattern>
+	</servlet-mapping>
+
+	<!-- For export.js / View Pages -->
+	<servlet>
+		<description>Get Information about ExportJson View pages</description>
+		<display-name>ViewPages</display-name>
+		<servlet-name>ViewPages</servlet-name>
+		<servlet-class>export.ViewPages</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ViewPages</servlet-name>
+		<url-pattern>/export/ViewPages</url-pattern>
+	</servlet-mapping>
+
+	<!-- For export.js -->
+	<servlet>
+		<description>Get Information about ExportJson</description>
+		<display-name>ExportJson</display-name>
+		<servlet-name>ExportJson</servlet-name>
+		<servlet-class>export.ExportJson</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ExportJson</servlet-name>
+		<url-pattern>/export/ExportJson</url-pattern>
+	</servlet-mapping>
+
+	<!-- For export.js -->
+	<servlet>
+		<description>Export List View</description>
+		<display-name>ExportListView</display-name>
+		<servlet-name>ExportListView</servlet-name>
+		<servlet-class>export.ExportListView</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ExportListView</servlet-name>
+		<url-pattern>/export/ExportListView</url-pattern>
+	</servlet-mapping>
+
+	<!-- For export.js -->
+	<servlet>
+		<description>Export Table View</description>
+		<display-name>ExportTableView</display-name>
+		<servlet-name>ExportTableView</servlet-name>
+		<servlet-class>export.ExportTableView</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ExportTableView</servlet-name>
+		<url-pattern>/export/ExportTableView</url-pattern>
+	</servlet-mapping>
+
+	<!-- For import Json in importJson.js -->
+	<servlet>
+		<description>Get Information about ImportJson</description>
+		<display-name>ImportJson</display-name>
+		<servlet-name>ImportJson</servlet-name>
+		<servlet-class>importJson.ImportJson</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ImportJson</servlet-name>
+		<url-pattern>/importJson/ImportJson</url-pattern>
+	</servlet-mapping>
+
 </web-app>

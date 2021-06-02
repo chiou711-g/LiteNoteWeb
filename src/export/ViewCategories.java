@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 
@@ -61,17 +62,30 @@ public class ViewCategories extends HttpServlet {
 				e.printStackTrace();
 			} catch (SQLException e) {
 				e.printStackTrace();
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 		
 		
 		JSONObject categoryObj = new JSONObject();
 		if (totalCategoriesCount >= 0 ) {
-			categoryObj.put("success", true);
-			categoryObj.put("totalCategoriesCount", totalCategoriesCount );
-			categoryObj.put("categories", categories);
+			try {
+				categoryObj.put("success", true);
+				categoryObj.put("totalCategoriesCount", totalCategoriesCount );
+				categoryObj.put("categories", categories);
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} else {
-			categoryObj.put("success", false);
+			try {
+				categoryObj.put("success", false);
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		// out

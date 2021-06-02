@@ -1,20 +1,25 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <% request.setCharacterEncoding("utf-8");%>
 <% response.setContentType("text/html;charset=utf-8"); %>
-<jsp:useBean id="categoryBean" class="categoryBean.CategoryBean" scope="application" />
+<jsp:useBean id="categoryBean" class="categoryBean.CategoryBean"
+	scope="application" />
 <jsp:setProperty property="*" name="categoryBean" />
-<jsp:useBean id="categoryService" class="categoryBean.CategoryService" scope="application" />
+<jsp:useBean id="categoryService" class="categoryBean.CategoryService"
+	scope="application" />
 <jsp:setProperty property="*" name="categoryService" />
 
 <jsp:useBean id="pageBean" class="pageBean.PageBean" scope="request"></jsp:useBean>
-<jsp:setProperty property="*" name="pageBean"/>
-<jsp:useBean id="pageService" class="pageBean.PageService" scope="application" />
+<jsp:setProperty property="*" name="pageBean" />
+<jsp:useBean id="pageService" class="pageBean.PageService"
+	scope="application" />
 <jsp:setProperty property="*" name="pageService" />
 
 <jsp:useBean id="noteBean" class="noteBean.NoteBean" scope="application" />
 <jsp:setProperty property="*" name="noteBean" />
-<jsp:useBean id="noteService" class="noteBean.NoteService" scope="application" />
+<jsp:useBean id="noteService" class="noteBean.NoteService"
+	scope="application" />
 <jsp:setProperty property="*" name="noteService" />
 
 <%@ page import="java.sql.*"%>
@@ -24,7 +29,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Swap link</title>
 
-<link rel="stylesheet" type="text/css" href="../../myStyle.css">	
+<link rel="stylesheet" type="text/css" href="../../myStyle.css">
 
 <script type="text/javascript" src="../../jquery-3.3.1.js">
 $(document).ready(function()
@@ -43,17 +48,18 @@ function showStatus(x,y)
 </head>
 
 <body>
-		<br>
-		<!-- Back button -->
-		&emsp;&emsp;
-		<input type="button" name="back" value="返回" 
-			style="background-color:#49743D;font-weight:bold;color:#ffffff;" 
-			onclick="parent.postMessage('swap link close', '*');history.back();">		
-		<br><br>
-		
-		<fieldset>
+	<br>
+	<!-- Back button -->
+	&emsp;&emsp;
+	<input type="button" name="back" value="返回"
+		style="background-color: #49743D; font-weight: bold; color: #ffffff;"
+		onclick="parent.postMessage('swap link close', '*');history.back();">
+	<br>
+	<br>
+
+	<fieldset>
 		<legend>Swap link</legend>
-		
+
 		<%
 			String pageId = pageService.getPageTableId();
 			String title = null;
@@ -64,45 +70,45 @@ function showStatus(x,y)
 		%>
 
 		<form id="swap_note_form" name="swapNoteForm">
-		
-		<input type = "button" id="clean_data" value = "重新輸入"> <br><br>
 
-		<b>Page ID:</b>
-		<input type = "text" id="page_number" name = "pageNumber" value ="<%=pageId%>"
-			size="10" readonly=readonly style="color:white;background-color:#142b2b;border:solid 0px;"> <br><br>
+			<input type="button" id="clean_data" value="重新輸入"> <br>
+			<br> <b>Page ID:</b> <input type="text" id="page_number"
+				name="pageNumber" value="<%=pageId%>" size="10" readonly=readonly
+				style="color: white; background-color: #142b2b; border: solid 0px;">
+			<br>
+			<br> <b>Page Title:</b> <input type="text" id="page_title"
+				name="pageTitle" value="<%=title%>" size="10" readonly=readonly
+				style="color: white; background-color: #142b2b; border: solid 0px;">
+			<br>
+			<br>
 
-		<b>Page Title:</b>
-		<input type = "text" id="page_title" name = "pageTitle" value ="<%=title%>"
-			size="10" readonly=readonly style="color:white;background-color:#142b2b;border:solid 0px;"> <br><br>
-				
-		<ul>
-		<li>
-			<b>Link Position 1:</b>
-	 		<input type = "text" id="swap_note_pos1" name = "swapNotePos1" size="10" style="background-color:Aquamarine;" >
-		</li>
- 		<li>
-			<b>Link Position 2:</b>
-			<input type = "text" id="swap_note_pos2" name = "swapNotePos2" size="10" style="background-color:Aquamarine;">
-		</li> 
-		</ul>
-		&nbsp;&nbsp;&nbsp;&nbsp;
-		
-		<!-- Swap button -->
-		<input type = "button" value = "互換Link" id="varSwapNote" name="varSwapNote" 
-			style="background-color:#490400;font-weight:bold;color:#ffffff;width: 5em;" >			
-			
+			<ul>
+				<li><b>Link Position 1:</b> <input type="text"
+					id="swap_note_pos1" name="swapNotePos1" size="10"
+					style="background-color: Aquamarine;"></li>
+				<li><b>Link Position 2:</b> <input type="text"
+					id="swap_note_pos2" name="swapNotePos2" size="10"
+					style="background-color: Aquamarine;"></li>
+			</ul>
+			&nbsp;&nbsp;&nbsp;&nbsp;
+
+			<!-- Swap button -->
+			<input type="button" value="互換Link" id="varSwapNote"
+				name="varSwapNote"
+				style="background-color: #490400; font-weight: bold; color: #ffffff; width: 5em;">
+
 		</form>
+	</fieldset>
+
+	<br>
+
+	<div id="swapNoteInfo">
+		<fieldset>
+			<legend>Status</legend>
+			<div id="ajaxSwapNoteInfo"></div>
 		</fieldset>
-		
-		<br>
-		
-	    <div id="swapNoteInfo">
-			<fieldset>
-				<legend >Status</legend>
-				<div id="ajaxSwapNoteInfo"></div>
-			</fieldset>
-		</div>			
+	</div>
 
 
-		</body>
+</body>
 </html>

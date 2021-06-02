@@ -54,8 +54,13 @@ public class ExportListView extends HttpServlet {
 			System.out.println("ExportListView / category_selection = null");
 			JSONObject clientObj = new JSONObject();
 			PrintWriter out = response.getWriter();
-			clientObj.put("client","none");
-			clientObj.put("content","No selection yet, please go back and select again.");
+			try {
+				clientObj.put("client","none");
+				clientObj.put("content","No selection yet, please go back and select again.");
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			out.print(clientObj.toString());
 		    out.flush();
 			return;
@@ -199,8 +204,13 @@ public class ExportListView extends HttpServlet {
 					System.out.println("ExportListView / _doPost / page title = " + pageBean.getPage_title());
 
 					JSONObject page = new JSONObject();
-					page.put("links",links);
-					page.put("title",pageBean.getPage_title());
+					try {
+						page.put("links",links);
+						page.put("title",pageBean.getPage_title());
+					} catch (JSONException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					
 					category_id = pageBean.getPage_category_id();
 
@@ -224,7 +234,12 @@ public class ExportListView extends HttpServlet {
 					
 				if(category != null)
 				{
-					category.put("pages",pages);
+					try {
+						category.put("pages",pages);
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					categories.put(category);
 				}					
 			}
@@ -233,7 +248,12 @@ public class ExportListView extends HttpServlet {
 		
 		// output Json to Ajax
 		JSONObject clientObj = new JSONObject();
-		clientObj.put("categories",categories);
+		try {
+			clientObj.put("categories",categories);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		System.out.println("ExportListView / clientObj = " + clientObj);
 		
 		PrintWriter out = response.getWriter();
@@ -245,24 +265,50 @@ public class ExportListView extends HttpServlet {
     	listStr = listStr.concat("<div align=\"center\" style=\"border: 1px solid white;background:#dfffdf;\">");
 	    for(int i=0;i<categories.length();i++  )
 	    {
-	    	JSONArray pages = ((JSONObject)categories.get(i)).getJSONArray("pages");
+	    	JSONArray pages = null;
+			try {
+				pages = ((JSONObject)categories.get(i)).getJSONArray("pages");
+			} catch (JSONException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 	    	for(int j=0;j<pages.length();j++)
 	    	{
-	    		JSONArray links = ((JSONObject)pages.get(j)).getJSONArray("links");
+	    		JSONArray links = null;
+				try {
+					links = ((JSONObject)pages.get(j)).getJSONArray("links");
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 	    		
-	    		String title = ((JSONObject)pages.get(j)).getString("title");
+	    		String title = null;
+				try {
+					title = ((JSONObject)pages.get(j)).getString("title");
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 	    		listStr = listStr.concat("<b style=\"background:#afffff;\">[" + title + "]</b><br><br>");
 	    		for(int k=0;k<links.length();k++)
 	    		{
 
-	    			// note Uri
-					String linkUriStr = ((JSONObject)links.get(k)).getString("note_link_uri"); 
+					String linkUriStr = null;
+					String imageUriStr = null;
+					String noteTitle = null;
+					try {
+		    			// note Uri
+						linkUriStr = ((JSONObject)links.get(k)).getString("note_link_uri");
+						// note Uri
+						imageUriStr = ((JSONObject)links.get(k)).getString("note_image_uri"); 
+						
+						// note title
+						noteTitle =  ((JSONObject)links.get(k)).getString("note_title"); 
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} 
 
-					// note Uri
-					String imageUriStr = ((JSONObject)links.get(k)).getString("note_image_uri"); 
-					
-					// note title
-					String noteTitle =  ((JSONObject)links.get(k)).getString("note_title"); 
 
 					if(linkUriStr.contains("youtu.be"))
 	    				linkUriStr = linkUriStr.replace("youtu.be","www.youtube.com");
@@ -309,7 +355,7 @@ public class ExportListView extends HttpServlet {
 		// save local list view file
 		if(osName.contains("Windows"))
 		{
-			copyPath = "c:/eclipse-workspace/LiteNoteWeb/WebContent/EXPORT_LIST_VIEW.html";
+			copyPath = "D:/Eclipse_ee_workspace/LiteNoteWeb/WebContent/EXPORT_LIST_VIEW.html";
 	    	BufferedWriter writer1 = getWriter(copyPath);
 		    writer1.write(getListString(listStr));
 		    writer1.close();

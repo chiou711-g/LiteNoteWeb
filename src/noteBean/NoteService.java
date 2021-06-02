@@ -19,9 +19,10 @@ import java.util.regex.Pattern;
 import com.google.api.client.http.HttpRequest;
 import com.google.api.client.http.HttpRequestInitializer;
 import com.google.api.client.http.javanet.NetHttpTransport;
+//import com.google.api.client.json.JsonFactory;
+//import com.google.api.client.json.gson.GsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.services.youtube.YouTube;
-import com.google.api.services.youtube.model.Video;
 import com.google.api.services.youtube.model.VideoListResponse;
 
 import myDB.MyDB;
@@ -31,27 +32,25 @@ import util.Util;
 public class NoteService implements Serializable {
 
 	MyDB myDB;
-	private static YouTube youtube;
+	public static YouTube youtube;
     boolean isGotDuration;
     String acquiredDuration;
     String duration;
     
 	public NoteService() {
-		myDB = new MyDB();
-		
-		///
-        // for Get duration
-        youtube = new YouTube.Builder(new NetHttpTransport(), new JacksonFactory(), new HttpRequestInitializer() {
-            public void initialize(HttpRequest request) throws IOException {
-            }
-        }
-        ).setApplicationName("LiteNoteWeb").build();		
-		///
 	};
 	
 	public NoteService(String tableNumber) {
 		this.table_number = tableNumber;
 		myDB = new MyDB();
+		
+		// for duration
+//        youtube = new YouTube.Builder(new NetHttpTransport(), new JacksonFactory(), new HttpRequestInitializer() {
+//            @Override
+//        	public void initialize(HttpRequest request) throws IOException {}
+//         })
+//        .setApplicationName("LiteNoteWeb")
+//       	.build();	
 	};
 	
 	private static final long serialVersionUID = 1L;
@@ -106,21 +105,21 @@ public class NoteService implements Serializable {
 			
 			///
 			// get duration
-	        isGotDuration = false;
-	        getDuration(Util.getYoutubeId(noteListBean.getNote_link_uri()));
-	        //wait for buffering
-	        int time_out_count = 0;
-	        while ((!isGotDuration) && time_out_count< 10)
-	        {
-	            try {
-	                Thread.sleep(100);
-	            } catch (InterruptedException e) {
-	                e.printStackTrace();
-	            }
-	            time_out_count++;
-	        }
-	        duration = acquiredDuration;	
-			noteListBean.setNote_duration(duration);
+//	        isGotDuration = false;
+//	        getDuration(Util.getYoutubeId(noteListBean.getNote_link_uri()));
+//	        //wait for buffering
+//	        int time_out_count = 0;
+//	        while ((!isGotDuration) && time_out_count< 10)
+//	        {
+//	            try {
+//	                Thread.sleep(100);
+//	            } catch (InterruptedException e) {
+//	                e.printStackTrace();
+//	            }
+//	            time_out_count++;
+//	        }
+//	        duration = acquiredDuration;	
+//			noteListBean.setNote_duration(duration);
 
 	        
 			// case 2
@@ -133,7 +132,7 @@ public class NoteService implements Serializable {
 //			noteListBean.setNote_duration(targetVideo.getContentDetails().getDuration());
 			///
 			
-//			noteListBean.setNote_duration("1:22:33");
+			noteListBean.setNote_duration("1:22:33");
 			noteBeanList.add(noteListBean);
 		}
 		prepStmt.clearParameters();

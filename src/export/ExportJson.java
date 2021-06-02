@@ -55,8 +55,13 @@ public class ExportJson extends HttpServlet {
 			System.out.println(" / category_selection = null");
 			JSONObject clientObj = new JSONObject();
 			PrintWriter out = response.getWriter();
-			clientObj.put("client","none");
-			clientObj.put("content","No selection yet, please go back and select again.");
+			try {
+				clientObj.put("client","none");
+				clientObj.put("content","No selection yet, please go back and select again.");
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			out.print(clientObj.toString());
 		    out.flush();
 			return;
@@ -203,8 +208,13 @@ public class ExportJson extends HttpServlet {
 					PageBean pageBean = getPageBean(String.valueOf(pageTableId));
 	
 					JSONObject page = new JSONObject();
-					page.put("title",pageBean.getPage_title());
-					page.put("links",links);
+					try {
+						page.put("title",pageBean.getPage_title());
+						page.put("links",links);
+					} catch (JSONException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					
 					category_id = pageBean.getPage_category_id();
 
@@ -228,8 +238,13 @@ public class ExportJson extends HttpServlet {
 					
 				if(category != null)
 				{
-					category.put("category",categoryName );
-					category.put("link_page",pages);
+					try {
+						category.put("category",categoryName );
+						category.put("link_page",pages);
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 	
 					categories.put(category);
 				}					
@@ -240,8 +255,13 @@ public class ExportJson extends HttpServlet {
 		
 		// Json to Ajax
 		JSONObject clientObj = new JSONObject();
-		clientObj.put("client","TV YouTube" );
-		clientObj.put("content",categories.toString());
+		try {
+			clientObj.put("client","TV YouTube" );
+			clientObj.put("content",categories.toString());
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		PrintWriter out = response.getWriter();
 		System.out.println(" / clientObj = " + clientObj);
@@ -250,8 +270,13 @@ public class ExportJson extends HttpServlet {
 	    
 		// write Json file
 		JSONObject fileObj = new JSONObject();
-		fileObj.put("client","TV YouTube" );
-		fileObj.put("content",categories);
+		try {
+			fileObj.put("client","TV YouTube" );
+			fileObj.put("content",categories);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	    String jsonStr = fileObj.toString();
 	    
 		String fileName =  request.getParameter("fileName");
@@ -284,7 +309,7 @@ public class ExportJson extends HttpServlet {
 
 		// local JSON
 		if(osName.contains("Windows"))
-		    copyPath = "c:/eclipse-workspace/LiteNoteWeb/WebContent/EXPORT_JSON.json";
+		    copyPath = "D:/Eclipse_ee_workspace/LiteNoteWeb/WebContent/EXPORT_JSON.json";
 		else
 			copyPath = "./Java-workspace/LiteNoteWeb/WebContent/EXPORT_JSON.json";
 

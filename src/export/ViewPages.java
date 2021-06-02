@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import myDB.MyDB;
@@ -134,6 +135,9 @@ public class ViewPages extends HttpServlet {
 				e.printStackTrace();
 			} catch (SQLException e) {
 				e.printStackTrace();
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 			
 			pages.put(page);
@@ -142,13 +146,23 @@ public class ViewPages extends HttpServlet {
 		
 		JSONObject pageObj = new JSONObject();
 		if (totalPagesCount >= 0 ) {
-			pageObj.put("success", true);
-			pageObj.put("totalPagesCount", totalPagesCount );
-			pageObj.put("pages", pages);
-			pageObj.put("currentCategoryId", currentCategoryId);
-			pageObj.put("currentCategoryName", currentCategoryName);
+			try {
+				pageObj.put("success", true);
+				pageObj.put("totalPagesCount", totalPagesCount );
+				pageObj.put("pages", pages);
+				pageObj.put("currentCategoryId", currentCategoryId);
+				pageObj.put("currentCategoryName", currentCategoryName);
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} else {
-			pageObj.put("success", false);
+			try {
+				pageObj.put("success", false);
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		// out

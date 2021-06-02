@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import categoryBean.CategoryBean;
@@ -64,17 +65,30 @@ public class ListPages extends HttpServlet {
 				e.printStackTrace();
 			} catch (SQLException e) {
 				e.printStackTrace();
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 		
 		JSONObject pageOut = new JSONObject();
 		if (totalPagesCount >= 0 ) {
-			pageOut.put("success", true);
-			pageOut.put("totalPagesCount", totalPagesCount );
-			// all pages
-			pageOut.put("pages", pages);
+			try {
+				pageOut.put("success", true);
+				pageOut.put("totalPagesCount", totalPagesCount );
+				// all pages
+				pageOut.put("pages", pages);
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} else {
-			pageOut.put("success", false);
+			try {
+				pageOut.put("success", false);
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		// out

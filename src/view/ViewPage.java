@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import categoryBean.CategoryBean;
@@ -61,6 +62,9 @@ public class ViewPage extends HttpServlet {
 				e.printStackTrace();
 			} catch (SQLException e) {
 				e.printStackTrace();
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 		
@@ -91,6 +95,9 @@ public class ViewPage extends HttpServlet {
 				e.printStackTrace();
 			} catch (SQLException e) {
 				e.printStackTrace();
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 		
@@ -113,16 +120,26 @@ public class ViewPage extends HttpServlet {
 		
 		JSONObject pageOut = new JSONObject();
 		if (totalPagesCount >= 0 ) {
-			pageOut.put("success", true);
-			pageOut.put("totalPagesCount", totalPagesCount );
-			pageOut.put("page_title", pageBean.getPage_title() );
-			pageOut.put("page_category_id", pageBean.getPage_category_id() );
-			// all pages
-			pageOut.put("pages", pages);
-			// all categories
-			pageOut.put("categories", cates);
+			try {
+				pageOut.put("success", true);
+				pageOut.put("totalPagesCount", totalPagesCount );
+				pageOut.put("page_title", pageBean.getPage_title() );
+				pageOut.put("page_category_id", pageBean.getPage_category_id() );
+				// all pages
+				pageOut.put("pages", pages);
+				// all categories
+				pageOut.put("categories", cates);
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} else {
-			pageOut.put("success", false);
+			try {
+				pageOut.put("success", false);
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		// out
