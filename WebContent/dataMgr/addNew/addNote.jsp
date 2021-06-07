@@ -134,11 +134,13 @@ input.button_size {
 	function getVids(vid){
 	  $.get(
 	    "https://www.googleapis.com/youtube/v3/videos",{
-	    part: 'snippet', 
-	    id: vid, 
-	    key: varApiKey},
+	    	part: 'snippet,contentDetails', 
+	    	id: vid, 
+	    	key: varApiKey },
 	      function(data){
-	      ChangeTitle(data.items[0].snippet.title);
+	    	//alert(data.items[0].snippet.title)
+	    	//alert(data.items[0].contentDetails.duration)
+	      	ChangeTitle(data.items[0].snippet.title);
 	      }
 	  )
 	}

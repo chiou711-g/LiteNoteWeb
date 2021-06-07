@@ -2,6 +2,10 @@ package noteBean;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,20 +14,22 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.google.api.client.http.HttpRequest;
-import com.google.api.client.http.HttpRequestInitializer;
-import com.google.api.client.http.javanet.NetHttpTransport;
-//import com.google.api.client.json.JsonFactory;
-//import com.google.api.client.json.gson.GsonFactory;
-import com.google.api.client.json.jackson2.JacksonFactory;
+import javax.net.ssl.HttpsURLConnection;
+
+import org.apache.commons.io.IOUtils;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.google.api.services.youtube.YouTube;
-import com.google.api.services.youtube.model.VideoListResponse;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
 
 import myDB.MyDB;
 import util.Util;
@@ -38,19 +44,12 @@ public class NoteService implements Serializable {
     String duration;
     
 	public NoteService() {
+		myDB = new MyDB();
 	};
 	
 	public NoteService(String tableNumber) {
 		this.table_number = tableNumber;
 		myDB = new MyDB();
-		
-		// for duration
-//        youtube = new YouTube.Builder(new NetHttpTransport(), new JacksonFactory(), new HttpRequestInitializer() {
-//            @Override
-//        	public void initialize(HttpRequest request) throws IOException {}
-//         })
-//        .setApplicationName("LiteNoteWeb")
-//       	.build();	
 	};
 	
 	private static final long serialVersionUID = 1L;
@@ -103,36 +102,24 @@ public class NoteService implements Serializable {
 			
 			noteListBean.setNote_title(rs.getString("note_title"));
 			
-			///
-			// get duration
-//	        isGotDuration = false;
-//	        getDuration(Util.getYoutubeId(noteListBean.getNote_link_uri()));
-//	        //wait for buffering
-//	        int time_out_count = 0;
-//	        while ((!isGotDuration) && time_out_count< 10)
-//	        {
-//	            try {
-//	                Thread.sleep(100);
-//	            } catch (InterruptedException e) {
-//	                e.printStackTrace();
-//	            }
-//	            time_out_count++;
-//	        }
-//	        duration = acquiredDuration;	
-//			noteListBean.setNote_duration(duration);
-
+			// get duration thread
+	        isGotDuration = false;
+	        getDurationThread(noteListBean.getNote_link_uri());
 	        
-			// case 2
-//	        String uri = noteListBean.getNote_link_uri();
-//			String id = Util.getYoutubeId(uri);
-//			Video targetVideo = getVideo(id);
-//			targetVideo.getSnippet().getTitle();
-//		    targetVideo.getStatistics().getViewCount();
-//		    targetVideo.getContentDetails().getDuration();
-//			noteListBean.setNote_duration(targetVideo.getContentDetails().getDuration());
-			///
-			
-			noteListBean.setNote_duration("1:22:33");
+	        //wait for buffering
+	        int time_out_count = 0;
+	        while ((!isGotDuration) && time_out_count< 10)
+	        {
+	            try {
+	                Thread.sleep(300);
+	            } catch (InterruptedException e) {
+	                e.printStackTrace();
+	            }
+	            time_out_count++;
+	        }
+	        duration = acquiredDuration;	
+			noteListBean.setNote_duration(duration);
+
 			noteBeanList.add(noteListBean);
 		}
 		prepStmt.clearParameters();
@@ -442,74 +429,129 @@ public class NoteService implements Serializable {
     	return isUpdated;
 	}
     
+	// get duration thread
+	public void getDurationThread(final String uri) {
 
-	///
-	 public void getDuration(final String youtubeId) {
+        // Call the API and print results.
+        Executors.newSingleThreadExecutor().submit(new Runnable() {
+            @Override
+            public void run() {
+                try {
+        			String duration = getYouTubeDuration(uri); 
+        			acquiredDuration = Util.convertYouTubeDuration(duration);
+        			//System.out.println("----- acquiredDuration = " + acquiredDuration);
+                    isGotDuration = true;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } catch (Throwable t) {
+                    t.printStackTrace();
+                }
 
-	        // Call the API and print results.
-	        Executors.newSingleThreadExecutor().submit(new Runnable() {
-	            @Override
-	            public void run() {
-	                try {
-	                    HashMap<String, String> parameters = new HashMap<>();
-	                    parameters.put("part", "contentDetails");
-	                    String stringsList = youtubeId;
+            }
+        });
+    }	
 
-	                    System.out.println("NoteService / _getDuration/ run /stringsList = "+ stringsList);
-	                    parameters.put("id", stringsList);
+	private static final Pattern YOUTUBE_ID_PATTERN = Pattern.compile("(?<=v\\=|youtu\\.be\\/)\\w+");
+	private static final Gson GSON = new GsonBuilder().create();
 
-	                    YouTube.Videos.List videosListMultipleIdsRequest = youtube.videos().list(parameters.get("part"));
-	                    videosListMultipleIdsRequest.setKey(ApiKey.DEVELOPER_KEY);
-	                    if (parameters.containsKey("id") && parameters.get("id") != "") {
-	                        videosListMultipleIdsRequest.setId(parameters.get("id"));
-	                    }
+	// get YouTube duration
+	public static String getYouTubeDuration(String url) {
+		
+	    Matcher m = YOUTUBE_ID_PATTERN.matcher(url);
+	    
+	    if (!m.find())
+	        throw new IllegalArgumentException("Invalid YouTube URL.");
+	    
+	    JsonElement element = null;
+		try {
+			element = getYoutubeInfo(m.group());
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		JSONObject jsonObject = null;
+		JSONArray jsonArray = null;
+		try {
+			jsonObject = new JSONObject(element.toString());
+			jsonArray = jsonObject.getJSONArray("items");
+		} catch (JSONException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
-	                    VideoListResponse response = videosListMultipleIdsRequest.execute();
-
-	                    String duration = response.getItems().get(0).getContentDetails().getDuration();
-	                    acquiredDuration = YouTubeTimeConvert.convertYouTubeDuration(duration);
-	                    System.out.println("NoteService / _getDurations / runnable / duration" + "(" + 0 + ") = " + duration);
-
-	                    isGotDuration = true;
-	                } catch (Exception e) {
-	                    e.printStackTrace();
-	                } catch (Throwable t) {
-	                    t.printStackTrace();
-	                }
-
-	            }
-	        });
-	    }	
-	 
-	 
-//	 Video getVideo(String videoId) {
-//		 YouTube youtube = new YouTube.Builder(new NetHttpTransport(), new JacksonFactory(),
-//			        new HttpRequestInitializer() {
-//			            public void initialize(HttpRequest request) throws IOException {
-//			            }
-//			        }).setApplicationName("video-test").build();
+		String title = null;
+		try {
+			title = jsonArray.getJSONObject(0).getJSONObject("contentDetails").getString("duration");
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return title;
+	}
+	
+	// get YouTube title
+//	public static String getYouTubeTitle(String url) {
+//		
+//	    Matcher m = YOUTUBE_ID_PATTERN.matcher(url);
+//	    
+//	    if (!m.find())
+//	        throw new IllegalArgumentException("Invalid YouTube URL.");
+//	    
+//	    JsonElement element = null;
+//		try {
+//			element = getYoutubeInfo(m.group());
+//		} catch (MalformedURLException e) {
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		
+//		JSONObject jsonObject = null;
+//		JSONArray jsonArray = null;
+//		try {
+//			jsonObject = new JSONObject(element.toString());
+//			jsonArray = jsonObject.getJSONArray("items");
+//		} catch (JSONException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
 //
-////			final String videoId = "Hl-zzrqQoSE";
-//			YouTube.Videos.List videoRequest = null;
-//			try {
-//				videoRequest = youtube.videos().list("snippet,statistics,contentDetails");
-//			} catch (IOException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//			videoRequest.setId(videoId);
-//			videoRequest.setKey(YouTubeDeveloperKey.DEVELOPER_KEY);
-//			VideoListResponse listResponse = null;
-//			try {
-//				listResponse = videoRequest.execute();
-//			} catch (IOException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//			List<Video> videoList = listResponse.getItems();
-//
-//			Video targetVideo = videoList.iterator().next();
-//			return targetVideo;
-//	 }
-	///
+//		String title = null;
+//		try {
+//			title = jsonArray.getJSONObject(0).getJSONObject("snippet").getString("title");
+//		} catch (JSONException e) {
+//			e.printStackTrace();
+//		}
+//		return title;
+//	}	
+
+	// get YouTube Json info
+	public static JsonElement getYoutubeInfo(String youtubeID) throws MalformedURLException, IOException {
+		//	String url = "https://www.googleapis.com/youtube/v3/videos?part=id%2C+snippet&id=" + youtubeID +
+			String url = "https://www.googleapis.com/youtube/v3/videos?part=id%2C+snippet,contentDetails&id=" + youtubeID +
+				"&key=" + ApiKey.DEVELOPER_KEY;
+		
+		//System.out.println("---- ulr = " + url);
+		
+	    HttpsURLConnection connection = (HttpsURLConnection) new URL(url).openConnection();
+	    connection.addRequestProperty("user-agent",
+	            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36");
+	    connection.connect();
+
+	    String content = IOUtils.toString(connection.getInputStream()); // Apache commons. Use whatever you like 
+	    connection.disconnect();
+
+	    String[] queryParams = content.split("\\&"); // It's query string format, so split on ampterstands
+	    for (String param : queryParams) {
+	        param = URLDecoder.decode(param, StandardCharsets.UTF_8.name()); // It's encoded, so decode it
+	        String[] parts = param.split("\\=", 2); // Again, query string format. Split on the first equals character
+	        
+	        if (parts[0].contains("videoListResponse")) // We want the player_response parameter. This has all the info
+	        	return GSON.fromJson(parts[0], JsonElement.class); // It's in JSON format, so you use a JSON deserializer to deserialize it
+	    }
+
+	    throw new RuntimeException("Failed to get info for video: " + youtubeID);
+	}		
+	 
 }
