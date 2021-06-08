@@ -31,6 +31,7 @@ public class ViewPage extends HttpServlet {
 		doPost(request, response);
 	}
 
+	CategoryService cateService;
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
@@ -46,7 +47,8 @@ public class ViewPage extends HttpServlet {
 		// categories
 		JSONArray cates = new JSONArray();
 		
-		CategoryService cateService = new CategoryService();
+		if(cateService == null)
+			cateService = new CategoryService();
 		int count = cateService.getCategories_count();
 		
 		for(int i=1;i<=count;i++)

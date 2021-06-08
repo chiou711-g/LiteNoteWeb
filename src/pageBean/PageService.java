@@ -71,7 +71,7 @@ public class PageService implements Serializable {
 			{
 				count++;
 			}
-			System.out.println("PageService / _getPages_count / pages count: " + count);
+//			System.out.println("PageService / _getPages_count / pages count: " + count);
 			
 			prepStmt.clearParameters();
 			prepStmt.close();

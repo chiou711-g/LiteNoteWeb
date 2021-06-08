@@ -111,7 +111,7 @@ public class NoteService implements Serializable {
 	        while ((!isGotDuration) && time_out_count< 10)
 	        {
 	            try {
-	                Thread.sleep(300);
+	                Thread.sleep(10);
 	            } catch (InterruptedException e) {
 	                e.printStackTrace();
 	            }
@@ -431,14 +431,20 @@ public class NoteService implements Serializable {
     
 	// get duration thread
 	public void getDurationThread(final String uri) {
-
+		System.out.println("----- _getDurationThread / uri = " + uri);
         // Call the API and print results.
         Executors.newSingleThreadExecutor().submit(new Runnable() {
             @Override
             public void run() {
                 try {
         			String duration = getYouTubeDuration(uri); 
-        			acquiredDuration = Util.convertYouTubeDuration(duration);
+        			if(duration == null) 
+        				acquiredDuration = "na";
+        			else if(duration.equalsIgnoreCase("P0D"))
+        				acquiredDuration = "Live";
+        			else
+        				acquiredDuration = Util.convertYouTubeDuration(duration);
+
         			//System.out.println("----- acquiredDuration = " + acquiredDuration);
                     isGotDuration = true;
                 } catch (Exception e) {
@@ -451,7 +457,11 @@ public class NoteService implements Serializable {
         });
     }	
 
-	private static final Pattern YOUTUBE_ID_PATTERN = Pattern.compile("(?<=v\\=|youtu\\.be\\/)\\w+");
+	//private static final Pattern YOUTUBE_ID_PATTERN = Pattern.compile("(?<=v\\=|youtu\\.be\\/)\\w+");
+
+	static String expression = "^.*((youtu.be\\/)|(v\\/)|(\\/u\\/w\\/)|(embed\\/)|(watch\\?))\\??(v=)?([^#\\&\\?]*).*";
+	private static final Pattern YOUTUBE_ID_PATTERN = Pattern.compile(expression);
+
 	private static final Gson GSON = new GsonBuilder().create();
 
 	// get YouTube duration
@@ -464,7 +474,8 @@ public class NoteService implements Serializable {
 	    
 	    JsonElement element = null;
 		try {
-			element = getYoutubeInfo(m.group());
+//			element = getYoutubeInfo(m.group()); //something wrong when https://www.youtube.com/watch?v=USZkX--cXTM 
+			element = getYoutubeInfo(Util.getYoutubeId(url));
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -481,13 +492,17 @@ public class NoteService implements Serializable {
 			e1.printStackTrace();
 		}
 
-		String title = null;
-		try {
-			title = jsonArray.getJSONObject(0).getJSONObject("contentDetails").getString("duration");
-		} catch (JSONException e) {
-			e.printStackTrace();
+		String duration = null;
+		
+		if(jsonArray.length() >0) { // skip private URI
+			try {
+				duration = jsonArray.getJSONObject(0).getJSONObject("contentDetails").getString("duration");
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
 		}
-		return title;
+		System.out.println("------ duration = " + duration);
+		return duration;
 	}
 	
 	// get YouTube title
@@ -528,8 +543,10 @@ public class NoteService implements Serializable {
 
 	// get YouTube Json info
 	public static JsonElement getYoutubeInfo(String youtubeID) throws MalformedURLException, IOException {
+		System.out.println("----- youtubeID = " + youtubeID);
 		//	String url = "https://www.googleapis.com/youtube/v3/videos?part=id%2C+snippet&id=" + youtubeID +
-			String url = "https://www.googleapis.com/youtube/v3/videos?part=id%2C+snippet,contentDetails&id=" + youtubeID +
+		//  String url = "https://www.googleapis.com/youtube/v3/videos?part=id%2C+snippet,contentDetails&id=" + youtubeID +
+				String url = "https://www.googleapis.com/youtube/v3/videos?part=id%2C+contentDetails&id=" + youtubeID +
 				"&key=" + ApiKey.DEVELOPER_KEY;
 		
 		//System.out.println("---- ulr = " + url);
@@ -547,7 +564,7 @@ public class NoteService implements Serializable {
 	        param = URLDecoder.decode(param, StandardCharsets.UTF_8.name()); // It's encoded, so decode it
 	        String[] parts = param.split("\\=", 2); // Again, query string format. Split on the first equals character
 	        
-	        if (parts[0].contains("videoListResponse")) // We want the player_response parameter. This has all the info
+	        if (parts[0].contains("videoListResponse") ) // We want the player_response parameter. This has all the info
 	        	return GSON.fromJson(parts[0], JsonElement.class); // It's in JSON format, so you use a JSON deserializer to deserialize it
 	    }
 
