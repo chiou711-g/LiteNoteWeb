@@ -3,12 +3,24 @@ $(document).ready(function() {
 });
 
 function select_page(new_value) {
+	
+	show_snack_bar(); 
+
 	document.getElementById("page_pos_number").value = new_value;
 	view_page();
 	read_all();
 }
 
+function show_snack_bar() {
+	// show snack bar
+	var x = document.getElementById("snackbar");
+  	x.className = "show";
+  	setTimeout(function(){ x.className = x.className.replace("show", ""); }, 30000); 
+}
+
 function select_page_at_all(new_value1,new_value2) {
+	show_snack_bar(); 
+
 	document.getElementById("click_page_category_pos").value = new_value1;
 	document.getElementById("page_pos_number").value = new_value2;
 	view_page();

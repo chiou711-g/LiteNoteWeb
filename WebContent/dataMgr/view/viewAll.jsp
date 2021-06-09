@@ -79,6 +79,7 @@
 </style>
 
 <link rel="stylesheet" type="text/css" href="../../myStyle.css">
+<link rel="stylesheet" type="text/css" href="../../snack_bar.css">
 
 <!-- script -->
 <script src="../../jquery-3.3.1.js"></script>
@@ -184,6 +185,9 @@ $(document).ready(function () {
 	</div>
 	<br>
 	<br>
+
+	<!-- show snack bar -->
+	<div id="snackbar"> 讀取資料中 ...</div>
 
 	<%--links list --%>
 	<c:choose>
