@@ -189,7 +189,8 @@
 			<select id="project_selection" onchange="getFileName();this.size=1; "
 				onfocus="this.selectedIndex=-1;this.size=0;" style="height: 2.0em;">
 				<option id="project_id1" value="Default_YouLite">YouLite</option>
-				<option id="project_id2" value="Default_TV-youtube">TV-youtube</option>
+				<option id="project_id2" value="Default_YouList4TV">TV-YouList4TV</option>
+				<option id="project_id3" value="Default_TV-youtube">TV-youtube</option>
 			</select>
 
 			<!-- show file name -->
