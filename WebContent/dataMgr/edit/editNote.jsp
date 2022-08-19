@@ -12,7 +12,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript" src="../../jquery-3.3.1.js"></script>
-<script type="text/javascript" src="../apiKey.js"></script>
+<script type="text/javascript" src="../apiAuth.js"></script>
 <link rel="stylesheet" type="text/css" href="../../myStyle.css">
 
 <title>Edit note</title>

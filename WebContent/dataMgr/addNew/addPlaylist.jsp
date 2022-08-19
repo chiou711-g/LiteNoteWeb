@@ -21,8 +21,12 @@
 <script	src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
 -->
 <script type="text/javascript" src="../../jquery-3.3.1.js"></script>
-<script type="text/javascript" src="../apiKey.js"></script>
+<script type="text/javascript" src="../apiAuth.js"></script>
 <script src="https://apis.google.com/js/api.js"></script>
+<script type="text/javascript" src="addPlaylist.js"></script>
+
+<!-- for GIS(Google Identity Service) -->
+<script src="https://accounts.google.com/gsi/client" onload="initClient()" async defer></script>
 
 <link rel="stylesheet" type="text/css" href="../../myStyle.css">
 
@@ -64,19 +68,15 @@ input.button_size {
 	<fieldset>
 		<legend>Add playlist</legend>
 		<form id="addPlaylistForm" name="addPlaylistForm">
-			<input type="reset" value="重新輸入">
-			<script type="text/javascript" src="addPlaylist.js"></script>
-			<ol>
-				<li>
-					<ul>
-						<li><b>Playlist ID:</b> <input type="text" id="playlist_id"
-							placeholder="Playlist ID" name="playlistId" size="48" value="">
-						</li>
-						<li><input type="button" id="btnAuth" value="認證"
+			<input type="reset" value="重新輸入"><br><br>
+			
+			
+			<input type="button" id="btnAuth" value="GIS 認證"
 							style="background-color: #490400; font-weight: bold; color: #ffffff;" />
-						</li>
-
-					</ul>
+							
+			<ol>
+				<li><b>Playlist ID:</b> <input type="text" id="playlist_id"
+					placeholder="Playlist ID" name="playlistId" size="48" value="">
 				</li>
 
 
@@ -116,11 +116,15 @@ input.button_size {
 	<script type="text/javascript">
 	$("#btnAuth").click(
 	 function () {
-		authenticate().then(loadClient);
-        }
+		 //old
+		 //authenticate().then(loadClient);
+		
+		 //for GIS
+		 getToken();
+       }
     );
 
-</script>
+	</script>
 	<!-- Add Playlist end -->
 
 </body>

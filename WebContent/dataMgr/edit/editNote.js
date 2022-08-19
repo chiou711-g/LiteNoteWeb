@@ -146,7 +146,7 @@ $(document).ready(function() {
 	});	
 
 	// get YouTube title
-	var varApiKey = apiKey.str;
+	var varApiKey = apiAuth.keyStr;
 	$("#btnGetTitle").click(
 		function () {
 	      	var url =  document.getElementById("note_link_uri").value;

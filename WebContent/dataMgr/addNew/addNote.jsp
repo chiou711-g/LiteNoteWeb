@@ -21,7 +21,7 @@
 <script	src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
 -->
 <script type="text/javascript" src="../../jquery-3.3.1.js"></script>
-<script type="text/javascript" src="../apiKey.js"></script>
+<script type="text/javascript" src="../apiAuth.js"></script>
 <link rel="stylesheet" type="text/css" href="../../myStyle.css">
 
 <style>
@@ -117,7 +117,7 @@ input.button_size {
 
 
 	<script type="text/javascript">
-		var varApiKey = apiKey.str;
+		var varApiKey = apiAuth.keyStr;
 		$(document).ready(function () {
 			$("#btnGetTitle").click(
 		    	function () {

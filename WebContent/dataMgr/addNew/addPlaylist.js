@@ -8,7 +8,7 @@
   
 	function loadClient() {
 		//	    gapi.client.setApiKey("YOUR_API_KEY");
-			var varApiKey = apiKey.str;
+			var varApiKey = apiAuth.keyStr;
 	    	gapi.client.setApiKey(varApiKey);
 	    
 	    	return gapi.client.load("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest")
@@ -16,10 +16,36 @@
               				function(err) { console.error("Error loading GAPI client for API", err); });
 	}
   
+    // called when load web page 
 	gapi.load("client:auth2", function() {
 		//	    gapi.auth2.init({client_id: "YOUR_CLIENT_ID"});
-	    gapi.auth2.init({client_id: apiKey.client_id});
+	     gapi.auth2.init({client_id: apiAuth.client_id});
 	});
+	
+	
+	// for GIS
+	var client;
+	var access_token;
+	
+	// for GIS
+	function initClient() {
+	  client = google.accounts.oauth2.initTokenClient({
+	    client_id: apiAuth.client_id,
+	    scope: 'https://www.googleapis.com/auth/youtube.readonly',
+	    callback: (tokenResponse) => {
+	    access_token = tokenResponse.access_token;
+	      loadClient();
+	      alert('--- Access Token --- \n' + '--- Load client ---');
+	    },
+	  });
+	
+	}
+	
+	// for GIS  
+	function getToken() {
+	  client.requestAccessToken();
+	}
+	
   
 	function execute(nextPageToken) {
 	    var playlist_id = document.getElementById("playlist_id").value;
