@@ -33,7 +33,7 @@
 
 	<table border=0 width=100% align=right>
 		<tr align="center">
-			<td><a href="../index.html" target="_top"> <font size="5">[更新資料]</font></a></td>
+			<td><a href="../index.html" target="_top"> <font size="5">[Renew Data]</font></a></td>
 		</tr>
 
 		<tr>

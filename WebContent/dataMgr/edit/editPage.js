@@ -89,7 +89,7 @@ $(document).ready(function() {
 	
 	// Ajax: delete page 
 	$("#varDeletePage").click(function(e) {
-		var r = confirm("確定要刪除這page?")
+		var r = confirm("Sure to delete this page?")
 		if( r== true)
 			doDeleteAjax();
 	

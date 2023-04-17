@@ -45,7 +45,7 @@ function showStatus(x,y)
 	<br>
 	<!-- Back button -->
 	&emsp;&emsp;
-	<input type="button" name="back" value="返回"
+	<input type="button" name="back" value="Back"
 		style="background-color: #49743D; font-weight: bold; color: #ffffff;"
 		onclick="parent.postMessage('move page close', '*');history.back();">
 	<br>
@@ -56,7 +56,7 @@ function showStatus(x,y)
 
 		<form id="move_page_form" name="movePageForm">
 
-			<input type="button" id="clean_data" value="重新輸入">
+			<input type="button" id="clean_data" value="Reset">
 			<ul>
 				<li><b>From page position 2:</b> <input type="text"
 					id="move_page_pos2" name="movePagePos2" size="10"

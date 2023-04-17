@@ -90,7 +90,7 @@ $(document).ready(function() {
 	
 	// delete ajax
 	$("#varDeleteOne").click(function(e) {
-		var r = confirm("確定要刪除這link?")
+		var r = confirm("Sure to delete this link?")
 		if( r== true)
 			doDeleteAjax();
 	
@@ -146,28 +146,50 @@ $(document).ready(function() {
 	});	
 
 	// get YouTube title
-	var varApiKey = apiAuth.keyStr;
+	//var varApiKey = apiAuth.keyStr;
 	$("#btnGetTitle").click(
 		function () {
-	      	var url =  document.getElementById("note_link_uri").value;
-	      	var regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-	      	var match = url.match(regExp);
-	      	if (match && match[2].length == 11) {
-	      		getVids (match[2]);
-	      	}
+			// with YouTube API
+//	      	var url =  document.getElementById("note_link_uri").value;
+//	      	var regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+//	      	var match = url.match(regExp);
+//	      	if (match && match[2].length == 11) {
+//	      		getVids (match[2]);
+//	      	}
+
+			// without YouTube API
+			var url = document.getElementById("note_link_uri").value;
+			$.getJSON('https://noembed.com/embed',
+			    {format: 'json', url: url}, function (data) {
+			    ChangeTitle(data.title);
+			    getImageUri();
+			});
 		}
 	);
 
-	function getVids(vid){
-		$.get(
-		"https://www.googleapis.com/youtube/v3/videos",{
-		part: 'snippet', 
-		id: vid, 
-		key: varApiKey},
-		  function(data){
-		  ChangeTitle(data.items[0].snippet.title);
-		  }
-		)
+//	function getVids(vid){
+//		$.get(
+//		"https://www.googleapis.com/youtube/v3/videos",{
+//		part: 'snippet', 
+//		id: vid, 
+//		key: varApiKey},
+//		  function(data){
+//		  ChangeTitle(data.items[0].snippet.title);
+//		  }
+//		)
+//	}
+
+	function getImageUri(){			
+		var url =  document.getElementById("note_link_uri").value;
+		var regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+		var match = url.match(regExp);
+		var imageUri;
+		if (match && match[2].length == 11) {
+			//getVids (match[2]);
+			imageUri = "https://img.youtube.com/vi/"+ match[2] + "/0.jpg";
+		}
+		document.getElementById("note_image_uri").value = imageUri;
+		return imageUri;
 	}
 
 	function ChangeTitle(titleText) {

@@ -48,7 +48,7 @@ function showStatus(x,y)
 
 	<!-- Back button -->
 	&emsp;&emsp;
-	<input type="button" name="back" value="返回"
+	<input type="button" name="back" value="Back"
 		style="background-color: #49743D; font-weight: bold; color: #ffffff;"
 		onclick="parent.postMessage('add new close', '*');history.back();">
 	<br>
@@ -59,7 +59,7 @@ function showStatus(x,y)
 
 		<form id="edit_category_form" name="editCategoryForm">
 
-			<input type="button" id="clean_data" value="重新輸入"> <br>
+			<input type="button" id="clean_data" value="Reset"> <br>
 			<br> &emsp; <b>Category Position:</b> <input type="text"
 				id="edit_category_pos" name="editCategoryPos"
 				value="<%=category_pos%>" size="10" readonly
@@ -73,20 +73,20 @@ function showStatus(x,y)
 			&nbsp;&nbsp;&nbsp;&nbsp;
 
 			<!-- Update button -->
-			<input type="button" value="修改" id="varModifyCategory"
+			<input type="button" value="Modify" id="varModifyCategory"
 				name="varModifyCategory"
 				style="background-color: #490400; font-weight: bold; color: #ffffff; width: 5em;">
 
 			&nbsp;&nbsp;&nbsp;&nbsp;
 
 			<!-- Delete button -->
-			<input type="button" value="刪除" id="varDeleteCategory"
+			<input type="button" value="Delete" id="varDeleteCategory"
 				name="varDeleteCategory"
 				style="background-color: #990400; font-weight: bold; color: #ffffff; width: 5em;">
 
 			&nbsp;&nbsp;&nbsp;&nbsp;
 			<!-- Delete all button -->
-			<input type="button" value="刪除ALL" id="varDeleteAllCategory"
+			<input type="button" value="Delete ALL" id="varDeleteAllCategory"
 				name="varDeleteAllCategory"
 				style="background-color: #999900; font-weight: bold; color: #ffffff; width: 5em;">
 

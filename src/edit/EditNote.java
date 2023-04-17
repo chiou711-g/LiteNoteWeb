@@ -63,7 +63,7 @@ public class EditNote extends HttpServlet {
         
     	boolean isUpdated = false;
     	boolean isDeleted = false;
-        if ((null != req.getParameter("varModifyOne")) && (req.getParameter("varModifyOne").equals("修改")) ) 
+        if ((null != req.getParameter("varModifyOne")) && (req.getParameter("varModifyOne").equals("Modify")) ) 
         {
 	        try {
 				noteBeanService.updateNote(table_number, note_link_uri, note_image_uri, note_title, Integer.valueOf(note_id));
@@ -76,7 +76,7 @@ public class EditNote extends HttpServlet {
 				e1.printStackTrace();
 			}
         }
-        else if ((null != req.getParameter("varDeleteOne")) && (req.getParameter("varDeleteOne").equals("刪除")) )
+        else if ((null != req.getParameter("varDeleteOne")) && (req.getParameter("varDeleteOne").equals("Delete")) )
         {
 			try {
 				noteBeanService.deleteNote(table_number,note_id);

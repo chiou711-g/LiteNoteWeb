@@ -42,7 +42,7 @@ function showStatus(x,y)
 	<br>
 	<!-- Back button -->
 	&emsp;&emsp;
-	<input type="button" name="back" value="返回"
+	<input type="button" name="back" value="Back"
 		style="background-color: #49743D; font-weight: bold; color: #ffffff;"
 		onclick="parent.postMessage('swap category close', '*');history.back();">
 	<br>
@@ -53,7 +53,7 @@ function showStatus(x,y)
 
 		<form id="swap_category_form" name="swapCategoryForm">
 
-			<input type="button" id="clean_data" value="重新輸入">
+			<input type="button" id="clean_data" value="Reset">
 			<ol>
 				<li><b>Category Position 1:</b> <input type="text"
 					id="swap_category_pos1" name="swapCategoryPos1" size="10"

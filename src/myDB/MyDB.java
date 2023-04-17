@@ -63,7 +63,7 @@ public class MyDB {
 		try {
 			Context initContext = new InitialContext();
 			Context envContext = (Context) initContext.lookup("java:/comp/env");
-			dataSource = (DataSource) envContext.lookup("jdbc/LiteNoteWeb");
+			dataSource = (DataSource) envContext.lookup("jdbc/LiteNoteWeb_2023");
 			conn = dataSource.getConnection();
 		} catch (NamingException ex) {
 			throw new RuntimeException(ex);

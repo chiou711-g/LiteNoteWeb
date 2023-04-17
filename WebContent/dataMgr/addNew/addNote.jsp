@@ -52,7 +52,7 @@ input.button_size {
 
 	<!-- Add Note start -->
 	<br> &emsp;
-	<input type="button" name="back" value="返回"
+	<input type="button" name="back" value="Back"
 		style="background-color: #49743D; font-weight: bold; color: #ffffff;"
 		onclick="parent.postMessage('add new close', '*');history.back();">
 	<br>
@@ -62,15 +62,15 @@ input.button_size {
 	<fieldset>
 		<legend>Add link</legend>
 		<form id="addNoteForm" name="addNoteForm">
-			<input type="reset" value="重新輸入">
+			<input type="reset" value="Reset">
 			<script type="text/javascript" src="addNote.js"></script>
 			<ol>
 				<li>
 					<ul>
 						<li><b>Link URI:</b> <input type="text" id="note_link_uri"
-							placeholder="網址" name="noteLinkUri" size="48" value=""></li>
+							placeholder="link address" name="noteLinkUri" size="48" value=""></li>
 						<li><input type="button" id="btnGetTitle"
-							value="導入 YouTube Title"
+							value="Get YouTube Title"
 							style="background-color: #490400; font-weight: bold; color: #ffffff;" />
 						</li>
 					</ul>
@@ -94,12 +94,12 @@ input.button_size {
 					style="color: white; background-color: #142b2b; border: solid 0px; height: 2.0em;">
 					<input type="hidden" id="add_page_id" name="addPageId"></li>
 
-				<li><b>指定 Image URI:</b> <textarea id="note_image_uri"
+				<li><b>Assign Image URI:</b> <textarea id="note_image_uri"
 						name="noteImageUri" rows="4" cols="60">
 			</textarea></li>
 
 			</ol>
-			&emsp;<input id="addNoteBtn" type="button" value="新增Link"
+			&emsp;<input id="addNoteBtn" type="button" value="Add New Link"
 				style="background-color: #497440; font-weight: bold; color: #ffffff;">
 		</form>
 	</fieldset>
@@ -110,7 +110,7 @@ input.button_size {
 
 	<div id="addNoteInfo">
 		<fieldset>
-			<legend>新加入的Link</legend>
+			<legend>New Added Link</legend>
 			<div id="ajaxAddNoteInfo"></div>
 		</fieldset>
 	</div>
@@ -121,12 +121,21 @@ input.button_size {
 		$(document).ready(function () {
 			$("#btnGetTitle").click(
 		    	function () {
-		          	var url =  document.getElementById("note_link_uri").value;
-		          	var regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-		          	var match = url.match(regExp);
-		          	if (match && match[2].length == 11) {
-		          		getVids (match[2]);
-	        	}
+		    		// with YouTube API
+// 		          	var url =  document.getElementById("note_link_uri").value;
+// 		          	var regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+// 		          	var match = url.match(regExp);
+// 		          	if (match && match[2].length == 11) {
+// 		          		getVids (match[2]);
+//	        	}
+
+
+				// without YouTube API
+				var url = document.getElementById("note_link_uri").value;
+				$.getJSON('https://noembed.com/embed',
+				    {format: 'json', url: url}, function (data) {
+				    ChangeTitle(data.title);
+				});
 	         }
 	     );
 	});

@@ -52,7 +52,7 @@ input.button_size {
 
 	<!-- Add Page start -->
 	<br> &emsp;
-	<input type="button" name="back" value="返回"
+	<input type="button" name="back" value="Back"
 		style="background-color: #49743D; font-weight: bold; color: #ffffff;"
 		onclick="parent.postMessage('add new close', '*');history.back();">
 	<br>
@@ -61,7 +61,7 @@ input.button_size {
 	<fieldset>
 		<legend>Add page</legend>
 		<form id="addPageForm" name="addPageForm">
-			<input type="reset" value="重新輸入">
+			<input type="reset" value="Reset">
 			<ol>
 				<li><b>Page Title:</b> <input type="text" id="add_page_title"
 					name="add_page_title" size="30" value=""
@@ -87,7 +87,7 @@ input.button_size {
 					name="addPageCategoryId"></li>
 
 			</ol>
-			&emsp;&emsp;&emsp;<input type="button" id="addPageBtn" value="新增Page"
+			&emsp;&emsp;&emsp;<input type="button" id="addPageBtn" value="Add New Page"
 				style="background-color: #497440; font-weight: bold; color: #ffffff;">
 		</form>
 	</fieldset>
@@ -98,7 +98,7 @@ input.button_size {
 
 	<div id="addPageInfo">
 		<fieldset>
-			<legend>新加入的Page</legend>
+			<legend>New Added Page</legend>
 			<div id="ajaxAddPageInfo"></div>
 		</fieldset>
 	</div>

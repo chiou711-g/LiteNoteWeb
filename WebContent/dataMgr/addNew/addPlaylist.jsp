@@ -58,7 +58,7 @@ input.button_size {
 
 	<!-- Add Playlist start -->
 	<br> &emsp;
-	<input type="button" name="back" value="返回"
+	<input type="button" name="back" value="Back"
 		style="background-color: #49743D; font-weight: bold; color: #ffffff;"
 		onclick="parent.postMessage('add new close', '*');history.back();">
 	<br>
@@ -68,10 +68,10 @@ input.button_size {
 	<fieldset>
 		<legend>Add playlist</legend>
 		<form id="addPlaylistForm" name="addPlaylistForm">
-			<input type="reset" value="重新輸入"><br><br>
+			<input type="reset" value="Reset"><br><br>
 			
 			
-			<input type="button" id="btnAuth" value="GIS 認證"
+			<input type="button" id="btnAuth" value="Authenticate"
 							style="background-color: #490400; font-weight: bold; color: #ffffff;" />
 							
 			<ol>
@@ -96,7 +96,7 @@ input.button_size {
 					<input type="hidden" id="add_page_id" name="addPageId"></li>
 
 			</ol>
-			&emsp;<input id="addPlaylistBtn" type="button" value="新增Playlist"
+			&emsp;<input id="addPlaylistBtn" type="button" value="Add New Playlist"
 				style="background-color: #497440; font-weight: bold; color: #ffffff;">
 		</form>
 	</fieldset>
@@ -107,7 +107,7 @@ input.button_size {
 
 	<div id="addPlaylistInfo">
 		<fieldset>
-			<legend>新加入的Playlist</legend>
+			<legend>New Added Playlist</legend>
 			<div id="ajaxAddPlaylistInfo"></div>
 		</fieldset>
 	</div>

@@ -51,7 +51,7 @@ function showStatus(x,y)
 	<br>
 	<!-- Back button -->
 	&emsp;&emsp;
-	<input type="button" name="back" value="返回"
+	<input type="button" name="back" value="Back"
 		style="background-color: #49743D; font-weight: bold; color: #ffffff;"
 		onclick="parent.postMessage('move link close', '*');history.back();">
 	<br>
@@ -71,7 +71,7 @@ function showStatus(x,y)
 
 		<form id="move_note_form" name="moveNoteForm">
 
-			<input type="button" id="clean_data" value="重新輸入"> <br>
+			<input type="button" id="clean_data" value="Reset"> <br>
 			<br> <b>Page ID:</b> <input type="text" id="page_number"
 				name="pageNumber" value="<%=pageId%>" size="10" readonly=readonly
 				style="color: white; background-color: #142b2b; border: solid 0px;">

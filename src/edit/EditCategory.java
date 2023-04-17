@@ -58,7 +58,7 @@ public class EditCategory extends HttpServlet {
 	        System.out.println("EditCategory / _doPost / req.getParameter(\"varDeleteCategory\") = " + req.getParameter("varDeleteCategory"));
 
         
-	        if ((null != req.getParameter("varModifyCategory")) && (req.getParameter("varModifyCategory").equals("修改")) ) 
+	        if ((null != req.getParameter("varModifyCategory")) && (req.getParameter("varModifyCategory").equals("Modify")) ) 
 	        {
 	            String category_name = req.getParameter("category_name");
 	            System.out.println("EditCategory / _doPost / category_name = " + category_name);
@@ -72,7 +72,7 @@ public class EditCategory extends HttpServlet {
 					e1.printStackTrace();
 				}
 	        }
-	        else if ((null != req.getParameter("varDeleteCategory")) && (req.getParameter("varDeleteCategory").equals("刪除")) )
+	        else if ((null != req.getParameter("varDeleteCategory")) && (req.getParameter("varDeleteCategory").equals("Delete")) )
 	        {
 				try {
 					categoryService.deleteCategory(category_id);
@@ -126,7 +126,7 @@ public class EditCategory extends HttpServlet {
         } 
     	
     	// delete all categories
-    	if((null != req.getParameter("varDeleteAllCategory")) && (req.getParameter("varDeleteAllCategory").equals("刪除ALL")) )
+    	if((null != req.getParameter("varDeleteAllCategory")) && (req.getParameter("varDeleteAllCategory").equals("Delete ALL")) )
         {
     		System.out.println("EditCategory / _doPost / delete all categories");
     		CategoryService categoryService= new CategoryService();

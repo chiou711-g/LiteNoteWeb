@@ -155,7 +155,7 @@ $(document).ready(function () {
 	<div class="nav" align="center">
 		<fieldset>
 			<legend>
-				<b style="font-size: 30px; color: #7FFFD4;">所選Category的相關Pages</b>
+				<b style="font-size: 30px; color: #7FFFD4;">Related pages of Selected Category</b>
 			</legend>
 			<!-- Show pages by category -->
 			<table cellpadding="5" border="0" width="100%">
@@ -187,7 +187,7 @@ $(document).ready(function () {
 	<br>
 
 	<!-- show snack bar -->
-	<div id="snackbar"> 讀取資料中 ...</div>
+	<div id="snackbar"> Reading Data ...</div>
 
 	<%--links list --%>
 	<c:choose>
@@ -215,7 +215,7 @@ $(document).ready(function () {
 							<!-- full screen -->
 							<tr>
 								<td><a href="${noteBean.note_link_uri}"
-									target="_self|_parent|_top|framename|_blank"> [ 開啟] </a></td>
+									target="_self|_parent|_top|framename|_blank"> [Launch] </a></td>
 							</tr>
 							<!-- submit button -->
 							<tr>
@@ -245,7 +245,7 @@ $(document).ready(function () {
 			<div class="container">
 				<fieldset>
 					<legend>
-						<b style="font-size: 30px; color: #7FFFD4;">所選Page的相關Links</b>
+						<b style="font-size: 30px; color: #7FFFD4;">Related links of Selected Page</b>
 					</legend>
 					<div class="inner">
 						<c:forEach var="noteBean" items="${noteService.noteBeanList}"
@@ -272,7 +272,7 @@ $(document).ready(function () {
 											<div align="left">
 												<a href="${noteBean.note_link_uri}"
 													target="_self|_parent|_top|framename|_blank"
-													style="color: #ffffff; font-size: 20px;"> [開啟]</a>
+													style="color: #ffffff; font-size: 20px;"> [Launch]</a>
 											</div> <textarea rows="3" cols="29" readonly disabled wrap="hard"
 												style="resize: none; color: #ffffff; background-color: #000000">${noteBean.note_title}</textarea>
 											<textarea rows="3" cols="29" readonly disabled wrap="hard"
@@ -296,7 +296,7 @@ $(document).ready(function () {
 													value="${noteBean.note_title}">
 												<div align="left">
 													<input type="submit"
-														value="修改Link (ID:${noteBean.note_id})"
+														value="Modify Link (ID:${noteBean.note_id})"
 														class="small_button" />
 												</div>
 											</form>
@@ -312,7 +312,7 @@ $(document).ready(function () {
 		</c:when>
 
 		<c:otherwise>
-			<div>尚未選取讀取方式</div>
+			<div>No selection yet</div>
 		</c:otherwise>
 	</c:choose>
 	<br>

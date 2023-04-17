@@ -28,7 +28,7 @@ function showStatus(x,y)
 </head>
 <body>
 	<br> &emsp;
-	<input type="button" name="back" value="返回"
+	<input type="button" name="back" value="Back"
 		style="background-color: #49743D; font-weight: bold; color: #ffffff;"
 		onclick="history.back()">
 	<br>
@@ -52,7 +52,7 @@ function showStatus(x,y)
 				<li><b>Link URI:</b> <input type="text" id="note_link_uri"
 					name="note_link_uri"
 					value="<%=request.getParameter("note_link_uri")%>" size="60">
-					<input type="button" id="btnGetTitle" value="導入 YouTube Title"
+					<input type="button" id="btnGetTitle" value="Get YouTube Title"
 					class="button_size"
 					style="background-color: #490400; font-weight: bold; color: #ffffff;" />
 					<br></li>
@@ -66,18 +66,18 @@ function showStatus(x,y)
 			</ul>
 
 			<!-- Back button -->
-			<input type="button" id="clean_data" value="重新輸入"
+			<input type="button" id="clean_data" value="Reset"
 				style="background-color: #49743D; font-weight: bold; color: #ffffff;">
 			&nbsp;&nbsp;&nbsp;&nbsp;
 
 			<!-- Update button -->
-			<input type="button" value="修改" id="varModifyOne" name="varModifyOne"
+			<input type="button" value="Modify" id="varModifyOne" name="varModifyOne"
 				style="background-color: #490400; font-weight: bold; color: #ffffff;">
 
 			&nbsp;&nbsp;&nbsp;&nbsp;
 
 			<!-- Delete button -->
-			<input type="button" value="刪除" id="varDeleteOne" name="varDeleteOne"
+			<input type="button" value="Delete" id="varDeleteOne" name="varDeleteOne"
 				style="background-color: #990400; font-weight: bold; color: #ffffff;">
 
 		</form>

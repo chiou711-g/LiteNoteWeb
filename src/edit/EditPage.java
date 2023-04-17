@@ -52,7 +52,7 @@ public class EditPage extends HttpServlet {
         
     	boolean isUpdated = false;
     	boolean isDeleted = false;
-        if ((null != req.getParameter("varModifyPage")) && (req.getParameter("varModifyPage").equals("修改")) ) 
+        if ((null != req.getParameter("varModifyPage")) && (req.getParameter("varModifyPage").equals("Modify")) ) 
         {
             String page_title = req.getParameter("page_title");
             String page_category_id = req.getParameter("page_category_id");
@@ -73,7 +73,7 @@ public class EditPage extends HttpServlet {
 				e1.printStackTrace();
 			}
         }
-        else if ((null != req.getParameter("varDeletePage")) && (req.getParameter("varDeletePage").equals("刪除")) )
+        else if ((null != req.getParameter("varDeletePage")) && (req.getParameter("varDeletePage").equals("Delete")) )
         {
 			try {
 				pageService.deletePage(page_id);

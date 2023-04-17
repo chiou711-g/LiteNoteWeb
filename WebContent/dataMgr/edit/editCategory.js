@@ -77,7 +77,7 @@ $(document).ready(function() {
 	
 	// Ajax: delete category 
 	$("#varDeleteCategory").click(function(e) {
-		var r = confirm("確定要刪除這category?")
+		var r = confirm("Sure to delete this category?")
 		if( r== true)
 			doDeleteAjax();
 	
@@ -126,7 +126,7 @@ $(document).ready(function() {
 
 	// Ajax: delete all categories 
 	$("#varDeleteAllCategory").click(function(e) {
-		var r = confirm("確定要刪除All categories?")
+		var r = confirm("Sure to delete All categories?")
 		if( r== true)
 			doDeleteAllAjax();
 	
